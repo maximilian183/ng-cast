@@ -2,10 +2,20 @@ angular.module('video-player')
 .component('videoList', {
   // TODO
   templateUrl: 'src/templates/videoList.html',
-  controller: function($scope) {
-    this.videos = window.exampleVideoData;
-    this.onClick = function() {
+  bindings: {
+    videos: '<'
+  },
+  controller: function($scope, $element, $attrs) {
+    var $ctrl = this;
 
+    $ctrl.$onInit = function(){
+      $scope.videos = $ctrl.videos;
+      console.log($scope.videos);
+    }
+
+
+    $ctrl.onClick = function(video) {
+      $scope.$parent.selectVideo(video);
     };
   }
 });
